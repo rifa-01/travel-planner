@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f7f4ee;
+  --color-surface: #ffffff;
+  --color-ink: #1b1f1e;
+  --color-ink-soft: #3b4240;
+  --color-muted: #6b716f;
+  --color-line: #e7e1d6;
+  --color-line-strong: #d6cebf;
+
+  --color-brand: #0f5e57;
+  --color-brand-strong: #0b4843;
+  --color-brand-soft: #e2efec;
+  --color-accent: #d4643a;
+  --color-accent-soft: #fbe9e1;
+  --color-sun: #e9a53b;
+  --color-sun-soft: #fdf3e0;
+  --color-danger: #b42318;
+  --color-danger-soft: #fdecea;
+  --color-ok: #2f7d4f;
+  --color-ok-soft: #e5f3ea;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --radius-card: 1.25rem;
+  --shadow-card: 0 1px 2px rgb(27 31 30 / 0.04), 0 4px 16px -6px rgb(27 31 30 / 0.08);
+  --shadow-lift: 0 2px 4px rgb(27 31 30 / 0.05), 0 16px 40px -12px rgb(27 31 30 / 0.18);
+
+  --animate-fade-up: fade-up 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-fade-in: fade-in 0.3s ease both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-float: float 3.2s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes shimmer {
+    from { background-position: -400px 0; }
+    to { background-position: 400px 0; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: var(--color-brand-soft);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #ece6da 0%, #f6f2ea 40%, #ece6da 80%);
+  background-size: 800px 100%;
+  animation: var(--animate-shimmer);
+  border-radius: 0.5rem;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Section anchors should clear the sticky header + nav. */
+[data-section] {
+  scroll-margin-top: 8.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  body { background: white; }
+  .no-print { display: none !important; }
+  .print-break { break-inside: avoid; }
+  [data-section] { scroll-margin-top: 0; }
+}
